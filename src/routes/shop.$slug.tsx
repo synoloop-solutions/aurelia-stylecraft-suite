@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { Heart, Star, Truck, RotateCcw, Lock, Minus, Plus } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { getProduct, getRelated } from "@/lib/products";
+import { getProduct, getRelated, type Product } from "@/lib/products";
 import { formatPrice, useStore } from "@/lib/store";
 import { ProductCard } from "@/components/site/ProductCard";
 
@@ -126,7 +126,7 @@ function ProductPage() {
               <span className="eyebrow">Color — {color}</span>
             </div>
             <div className="flex gap-2">
-              {product.colors.map((c) => (
+              {product.colors.map((c: { name: string; hex: string }) => (
                 <button key={c.name} onClick={() => setColor(c.name)} aria-label={c.name} title={c.name}
                   className={`h-8 w-8 rounded-full ring-1 ring-border ${color === c.name ? "outline outline-2 outline-offset-2 outline-foreground" : ""}`}
                   style={{ background: c.hex }} />
@@ -153,7 +153,7 @@ function ProductPage() {
               </Dialog>
             </div>
             <div className="flex flex-wrap gap-2">
-              {product.sizes.map((s) => (
+              {product.sizes.map((s: string) => (
                 <button key={s} onClick={() => setSize(s)}
                   className={`min-w-[44px] h-11 px-3 text-[12px] border ${size === s ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"}`}>
                   {s}
@@ -188,7 +188,7 @@ function ProductPage() {
               <AccordionTrigger className="eyebrow">Product Details</AccordionTrigger>
               <AccordionContent>
                 <ul className="list-disc pl-5 text-[13px] text-muted-foreground space-y-1">
-                  {product.details.map((d) => <li key={d}>{d}</li>)}
+                  {product.details.map((d: string) => <li key={d}>{d}</li>)}
                 </ul>
               </AccordionContent>
             </AccordionItem>
@@ -210,7 +210,7 @@ function ProductPage() {
         <section className="mt-24">
           <h2 className="font-serif text-2xl md:text-3xl italic mb-10">You may also like</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10">
-            {related.map((p) => <ProductCard key={p.slug} product={p} />)}
+            {related.map((p: Product) => <ProductCard key={p.slug} product={p} />)}
           </div>
         </section>
       )}

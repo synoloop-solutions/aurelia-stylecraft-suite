@@ -60,7 +60,7 @@ function ShopPage() {
   const title = params.category ? params.category.toUpperCase() : "ALL";
 
   const setParam = (k: string, v: string | undefined) =>
-    navigate({ search: (prev) => ({ ...prev, [k]: v || undefined }) as never });
+    navigate({ search: (prev: Record<string, unknown>) => ({ ...prev, [k]: v || undefined }) as never });
 
   const Filters = (
     <div className="space-y-8">
