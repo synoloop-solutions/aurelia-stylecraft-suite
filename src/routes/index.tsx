@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [
-      { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" } as never,
+      { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" } as never,
     ],
   }),
   component: HomePage,
