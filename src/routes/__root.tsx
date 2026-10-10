@@ -6,11 +6,11 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Toaster } from "@/components/ui/sonner";
 import { StoreProvider } from "@/lib/store";
@@ -37,12 +37,9 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -90,8 +87,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Aurelia Apparel — Modern heirlooms for the contemporary wardrobe" },
       { name: "twitter:description", content: "Aurelia Apparel crafts timeless silhouettes in premium natural fibers — tailored essentials, evening wear and leather goods." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4a2a16bf-7863-4012-8641-a46f27177ae4/id-preview-0e0ae2d6--78046950-41db-4c7f-9e04-9a2506280c49.lovable.app-1781186602351.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4a2a16bf-7863-4012-8641-a46f27177ae4/id-preview-0e0ae2d6--78046950-41db-4c7f-9e04-9a2506280c49.lovable.app-1781186602351.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

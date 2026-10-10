@@ -43,9 +43,9 @@ export function SiteFooter() {
         <div className="border-t border-border pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
           <p>© {new Date().getFullYear()} Aurelia Apparel. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-6">
-            <Link to="/policies/privacy">Privacy Policy</Link>
-            <Link to="/policies/terms">Terms of Service</Link>
-            <Link to="/policies/shipping">Cookie Settings</Link>
+            <Link to="/policies/$slug" params={{ slug: "privacy" }}>Privacy Policy</Link>
+            <Link to="/policies/$slug" params={{ slug: "terms" }}>Terms of Service</Link>
+            <Link to="/policies/$slug" params={{ slug: "shipping" }}>Cookie Settings</Link>
           </div>
         </div>
       </div>
